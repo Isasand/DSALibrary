@@ -12,16 +12,37 @@ class DoubleLinkedlist(object):
         self._head = None
         self._tail = None
  
-    def add(self, data):
+    def insertFirst(self, data):
         newNode = Node(data)
-        if self._head is None:
+        
+        if self.isEmpty():
+            self._tail = newNode
+        else:
+            self._head._prev = newNode
+            newNode._next = self._head
+        self._head = newNode
+        
+ 
+    def insertLast(self, data):
+        newNode = Node(data)
+        if self.isEmpty():
             self._head = self._tail = newNode
         else:
-            newNode._prev = self._tail
             newNode._next = None
+            newNode._prev = self._tail
             self._tail._next = newNode
             self._tail = newNode
- 
+        
+    def fromList(self, l):
+        if len(l) == 1:
+            if not l[0] == None: 
+                return self.add(l[0])
+        self.add(l[0])
+        self.fromList(l[1:])
+    
+    def isEmpty(self):
+        return self._head == None
+    
     def remove(self, node_value):
         current = self._head
  

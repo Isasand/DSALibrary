@@ -7,14 +7,12 @@ Created on Thu Nov 23 11:16:23 2017
 
 import unittest
 from Linkedlist import Linkedlist
-from Linkedlist import Node
 from DoublyLinkedlist import DoubleLinkedlist
 
 class TestLinkedlist(unittest.TestCase):
     def test_Linkedlist_toList(self):
         L = Linkedlist()
         L.add(22, 23)
-        L.printList() # this prints the list as a string 
         
         self.assertEqual(L.toList(), [23, 22] )
     
@@ -38,15 +36,14 @@ class TestLinkedlist(unittest.TestCase):
     def test_Linkedlist_show(self):
         L = Linkedlist()
         L.add(5, 6, 50, 30)
-        L.show()
+        #L.show()
         L.remove(50)
         L.remove(5)
-        L.show()
+        #L.show()
         
     def test_Linkedlist_reversed(self):
         L = Linkedlist()
         L.add(5, 6, 50, 30)
-        L.show()
         L.reverse(L.getHead())
         self.assertEqual(L.toList(), [5, 6, 50, 30] )
     
@@ -54,21 +51,26 @@ class TestLinkedlist(unittest.TestCase):
         l = [1, 2, 3, 4, 5]
         L = Linkedlist()
         L.fromList(l)
-        L.show()
         self.assertEqual(L.toList(), [5,4,3,2,1] )
         
         
 class TestDoublyLinkedlist(unittest.TestCase):
     def test_doublyLinkedlist(self):
         L = DoubleLinkedlist()
-        L.add(5)
-        L.add(6)
-        L.add(50)
-        L.add(30)
+        L.insertFirst(5)
+        L.insertFirst(6)
+        L.insertFirst(30)
+        L.insertFirst(50)
         L.show()
-        L.remove(50)
-        L.remove(5)
-        L.show()
+        #L.remove(50)
+        #L.remove(5)
+        #L.show()
+        P = DoubleLinkedlist()
+        P.insertLast(5)
+        P.insertLast(6)
+        P.insertLast(30)
+        P.insertLast(50)
+        P.show()
     
 if __name__ == '__main__':
     unittest.main(verbosity=2) 

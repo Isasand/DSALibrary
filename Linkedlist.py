@@ -64,7 +64,6 @@ class Linkedlist(object):
         self.add(l[0])
         self.fromList(l[1:])
         
-        
     def insert(self, data, after_node):
         newnode = Node(data)
         newnode.setNext(after_node.getNext())
