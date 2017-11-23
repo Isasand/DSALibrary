@@ -27,7 +27,7 @@ class Node(object):
         return self._prev
     
     def setPrev(self, argPrev):
-        self._prev = ArgPrev
+        self._prev = argPrev
         
 class Linkedlist(object):
     def __init__(self):
@@ -38,12 +38,32 @@ class Linkedlist(object):
         return self._head == None
        #could also return self._size == 0
     
-    def add(self, data):
+    def getHead(self):
+        return self._head
+    
+    #takes one or more arguments
+    def add(self, data, *mult):
         newnode = Node(data)
         newnode.setNext(self._head)
         self._head = newnode
         self._size += 1
-
+        
+        if mult: 
+            if len(mult) == 1: 
+                if not mult[0] == None:
+                    self.add(mult[0])
+                return
+            self.add(mult[0])
+            self.fromList(list(mult[1:]))
+         
+    #add from list 
+    def fromList(self, l):
+        if len(l) == 1:
+            if not l[0] == None: 
+                return self.add(l[0])
+        return self.add(l[0], self.fromList(l[1:]))
+        
+        
     def insert(self, data, after_node):
         newnode = Node(data)
         newnode.setNext(after_node.getNext())
@@ -63,13 +83,24 @@ class Linkedlist(object):
             if current.getNext().getData() == node: 
                 current.setNext(current.getNext().getNext())
                 self._size -= 1
-                return self
+                return
             current = current.getNext() 
         return
      
     def printList(self):
         print(str(self.toList()))
     
+    #pass the self._head as node here
+    def reverse(self, node):
+        if node.getNext() == None:
+            self._head = node
+            return 
+        self.reverse(node.getNext())
+        temp = node.getNext()
+        temp.setNext(node)
+        node.setNext(None)
+        
+        
     def show(self):
         print("show list data:")
         current = self._head
