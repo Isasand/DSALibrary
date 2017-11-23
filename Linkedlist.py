@@ -61,7 +61,8 @@ class Linkedlist(object):
         if len(l) == 1:
             if not l[0] == None: 
                 return self.add(l[0])
-        return self.add(l[0], self.fromList(l[1:]))
+        self.add(l[0])
+        self.fromList(l[1:])
         
         
     def insert(self, data, after_node):
