@@ -76,10 +76,24 @@ class Linkedlist(object):
                 return current 
             current = current.getNext()
         return None
-            
+         
+    def search_byIndex(self, index):
+        if not index > self._size :
+            current = self._head 
+            for i in range(0, index):
+                current = current.getNext()
+            return current 
+        
     def remove(self, node): #remove by value
-        current = self._head 
-        while not current == None:
+        current = self.search(node)
+ 
+        while current is not None:
+            #if it is the tail we need to find the previous one
+            if current._next == None: 
+                self.search_byIndex(self.size()-2)._next = None
+                self._size -= 1
+                return 
+                
             if current.getNext().getData() == node: 
                 current.setNext(current.getNext().getNext())
                 self._size -= 1

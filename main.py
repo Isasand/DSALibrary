@@ -23,6 +23,7 @@ class TestLinkedlist(unittest.TestCase):
         self.assertEqual(L.size(), 2 )
     
     def test_Linkedlist_remove(self):
+        #we can remove both tail and head here
         L = Linkedlist()
         L.add(22, 23, 25, 26, 27, 28)
         L.remove(22)
@@ -35,11 +36,8 @@ class TestLinkedlist(unittest.TestCase):
 
     def test_Linkedlist_show(self):
         L = Linkedlist()
-        L.add(5, 6, 50, 30)
-        #L.show()
-        L.remove(50)
-        L.remove(5)
-        #L.show()
+        L.add(1, 2, 3, 4)
+        L.show()
         
     def test_Linkedlist_reversed(self):
         L = Linkedlist()
@@ -51,27 +49,44 @@ class TestLinkedlist(unittest.TestCase):
         l = [1, 2, 3, 4, 5]
         L = Linkedlist()
         L.fromList(l)
-        self.assertEqual(L.toList(), [5,4,3,2,1] )
+        self.assertEqual(L.toList(), [5, 4, 3, 2, 1] )
         
         
 class TestDoublyLinkedlist(unittest.TestCase):
-    def test_doublyLinkedlist(self):
+    
+    def test_doublyLinkedlist_insert_first(self):
         L = DoubleLinkedlist()
         L.insertFirst(5)
         L.insertFirst(6)
         L.insertFirst(30)
         L.insertFirst(50)
         L.show()
-        #L.remove(50)
-        #L.remove(5)
-        #L.show()
+        self.assertEqual(L.toList(), [50, 30, 6, 5] )
+      
+    def test_doublyLinkedlist_insert_last(self):
+        
         P = DoubleLinkedlist()
         P.insertLast(5)
         P.insertLast(6)
         P.insertLast(30)
         P.insertLast(50)
-        P.show()
+        self.assertEqual(P.toList(), [5, 6, 30, 50] )
     
+    def test_doublyLinkedlist_remove(self):
+        #we remove both the head and the tail here to see that it works
+        L = DoubleLinkedlist()
+        L.insertFirst(6)
+        L.insertFirst(5)
+        L.insertFirst(30)
+        L.insertFirst(50)
+        L.remove(6)
+        L.remove(50)
+        self.assertEqual(L.toList(), [30,5])
+    
+   
+        
+        
+        
 if __name__ == '__main__':
     unittest.main(verbosity=2) 
     

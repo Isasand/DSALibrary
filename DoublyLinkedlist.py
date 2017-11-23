@@ -21,7 +21,6 @@ class DoubleLinkedlist(object):
             self._head._prev = newNode
             newNode._next = self._head
         self._head = newNode
-        
  
     def insertLast(self, data):
         newNode = Node(data)
@@ -40,23 +39,44 @@ class DoubleLinkedlist(object):
         self.add(l[0])
         self.fromList(l[1:])
     
+    def toList(self):
+        l = []
+        current = self._head
+        while not current == None:
+            l.append(current.getData())
+            current = current.getNext()
+        return l
+    
+    
     def isEmpty(self):
         return self._head == None
     
+    def search(self, searchData):
+        current = self._head 
+        while not current == None:
+            if current.getData() == searchData:
+                return current 
+            current = current.getNext()
+        return None
+    
     def remove(self, node_value):
-        current = self._head
+        current = self.search(node_value)
  
         while current is not None:
             if current._data == node_value:
                 # if it's not the first element
-                if current._prev is not None:
+                if current._next == None: 
+                    current._prev._next = None
+                    return 
+                
+                if not current._prev == None:
                     current._prev._next = current.getNext()
                     current._next._prev = current.getPrev()
-                else:
-                    # otherwise we have no prev (it's None),
-                    #head is the next one, and prev becomes None
-                    self._head = current._next
-                    current._next._prev = None
+                
+                if current is self._head: 
+                    self._head._next._prev = None
+                    self._head = self._head._next
+                    return
  
             current = current._next
  
