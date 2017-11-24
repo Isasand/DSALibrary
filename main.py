@@ -134,6 +134,31 @@ class testBinarySearchTree(unittest.TestCase):
         tree.insert(0)
         self.assertEqual(tree.search(20), 20)
         
+    def test_binarySearchTree_size(self):
+        #obviously the size starts at 0 and you will get the size - 1 out of the size function 
+        #i will rewrite it 
+        tree = BinarySearchTree(10)
+        tree.insert(20)
+        tree.insert(0)
+        self.assertEqual(tree.size(), 2)
+    
+    def test_binarySearchTree_printStructure(self):
+        tree = BinarySearchTree(10)
+        tree.insert(20)
+        tree.insert(0)
+        tree.insert(100)
+        tree.insert(50)
+        tree.insert(30)
+        tree.insert(7)
+        tree.insert(2)
+        tree.insert(3)
+        tree.insert(1)
+        tree.insert(9)
+        tree.insert(6)
+        tree.insert(60)
+        tree.insert(110)
+        tree.insert(17)
+        tree.printStructure()
     
 if __name__ == '__main__':
     unittest.main(verbosity=2) 

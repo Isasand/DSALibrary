@@ -12,6 +12,7 @@ class BinarySearchTree(object):
         self._left = None 
         self._right = None
         
+        
     def getData(self):
         return self._data
     
@@ -45,6 +46,32 @@ class BinarySearchTree(object):
             else:
                 self._right = BinarySearchTree(x)
     
+    def printStructure(self):
+        thislevel = [self]
+        a = '                                 '
+        while thislevel: 
+            string = "" 
+            nextlevel = [] 
+            l =  int(len(a)/ 2)
+            a = a[:l]
+            childs = 0
+            for n in thislevel: 
+                if childs == 0 and n.getData() > self.getData():
+                    string += " " * 10
+                    childs +=1
+                string += a +str(n.getData())
+                childs += 1
+                #print(a + str(n.getData())),
+                if n._left: 
+                    nextlevel.append(n._left)
+                
+                if n._right: 
+                    nextlevel.append(n._right)
+                thislevel = nextlevel  
+            print(string)
+               
+        return
+        
     def search(self, key):
         if self is None or self.getData() == key: 
             return self.getData()
@@ -52,8 +79,6 @@ class BinarySearchTree(object):
         if self.getData() < key :
             return self._right.search(key)
         return self._left.search(key)
-    
-        
         
     def delete(self, x, parent = None):
         if x < self.getData() : # sök till vänster
