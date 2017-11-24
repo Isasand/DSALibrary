@@ -8,6 +8,8 @@ Created on Thu Nov 23 11:16:23 2017
 import unittest
 from Linkedlist import Linkedlist
 from DoublyLinkedlist import DoubleLinkedlist
+from BinarySearchTree import BinarySearchTree 
+
 
 class TestLinkedlist(unittest.TestCase):
     def test_Linkedlist_toList(self):
@@ -51,7 +53,13 @@ class TestLinkedlist(unittest.TestCase):
         L.fromList(l)
         self.assertEqual(L.toList(), [5, 4, 3, 2, 1] )
         
+    def test_Linkedlist_insert(self):
+        l = Linkedlist()
+        l.add(22, 24, 25)
+        l.insert(20, 22)
+        self.assertEqual(l.toList(), [25, 24, 22, 20])
         
+    
 class TestDoublyLinkedlist(unittest.TestCase):
     
     def test_doublyLinkedlist_insert_first(self):
@@ -84,8 +92,12 @@ class TestDoublyLinkedlist(unittest.TestCase):
         self.assertEqual(L.toList(), [30,5])
     
    
-        
-        
+class testBinarySearchTree(unittest.TestCase):
+    
+    def test_binarySearchTree_insert(self):
+        tree = BinarySearchTree(10)
+        tree.insert(20)
+        tree.insert(0)
         
 if __name__ == '__main__':
     unittest.main(verbosity=2) 

@@ -35,17 +35,20 @@ class Linkedlist(object):
         self._size = 0 
         
     def isEmpty(self):
-        return self._head == None
+        return self.getHead() == None
        #could also return self._size == 0
     
     def getHead(self):
         return self._head
     
+    def setHead(self, h):
+        self._head = h
+        
     #takes one or more arguments
     def add(self, data, *mult):
         newnode = Node(data)
-        newnode.setNext(self._head)
-        self._head = newnode
+        newnode.setNext(self.getHead())
+        self.setHead(newnode)
         self._size += 1
         
         if mult: 
@@ -66,6 +69,7 @@ class Linkedlist(object):
         
     def insert(self, data, after_node):
         newnode = Node(data)
+        after_node = self.search(after_node)
         newnode.setNext(after_node.getNext())
         after_node.setNext(newnode)
 
@@ -79,7 +83,7 @@ class Linkedlist(object):
          
     def search_byIndex(self, index):
         if not index > self._size :
-            current = self._head 
+            current = self.getHead()
             for i in range(0, index):
                 current = current.getNext()
             return current 

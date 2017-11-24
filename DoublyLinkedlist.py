@@ -12,25 +12,38 @@ class DoubleLinkedlist(object):
         self._head = None
         self._tail = None
  
+    
+    def getTail(self):
+        return self._tail 
+    
+    def setTail(self, t):
+        self._tail = t
+        
+    def getHead(self):
+        return self._head 
+    
+    def setHead(self, h):
+        self._head = h
+        
     def insertFirst(self, data):
         newNode = Node(data)
         
         if self.isEmpty():
-            self._tail = newNode
+            self.setTail(newNode)
         else:
-            self._head._prev = newNode
-            newNode._next = self._head
-        self._head = newNode
+            self.getHead().setPrev(newNode)
+            newNode.setNext(self._head)
+        self.setHead(newNode)
  
     def insertLast(self, data):
         newNode = Node(data)
         if self.isEmpty():
             self._head = self._tail = newNode
         else:
-            newNode._next = None
-            newNode._prev = self._tail
-            self._tail._next = newNode
-            self._tail = newNode
+            newNode.setNext(None)
+            newNode.setPrev(self.getTail())
+            self.getTail().setNext(newNode)
+            self.setTail(newNode)
         
     def fromList(self, l):
         if len(l) == 1:
@@ -63,26 +76,26 @@ class DoubleLinkedlist(object):
         current = self.search(node_value)
  
         while current is not None:
-            if current._data == node_value:
+            if current.getData() == node_value:
                 # if it's not the first element
-                if current._next == None: 
-                    current._prev._next = None
+                if current.getNext() == None: 
+                    current.getPrev().setNext(None)
                     return 
                 
                 if not current._prev == None:
-                    current._prev._next = current.getNext()
-                    current._next._prev = current.getPrev()
+                    current.getPrev().setNext(current.getNext())
+                    current.getNext().setPrev(current.getPrev())
                 
                 if current is self._head: 
                     self._head._next._prev = None
-                    self._head = self._head._next
+                    self.setHead(self.getHead().getNext())
                     return
  
             current = current._next
  
     def show(self):
         print("Show list data:")
-        current = self._head
+        current = self.getHead()
         while current is not None:
             print (current.getPrev().getData()) if hasattr(current.getPrev(), "data") else None,
             print (current.getData()),
