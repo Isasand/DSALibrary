@@ -39,7 +39,8 @@ class DoubleLinkedlist(object):
             newNode.setNext(self._head)
             self._size += 1
         self.setHead(newNode)
- 
+        
+        
     def insertLast(self, data):
         newNode = Node(data)
         if self.isEmpty():
@@ -52,14 +53,14 @@ class DoubleLinkedlist(object):
             self.setTail(newNode)
             self._size += 1 
             
-        
+    #i allways insert lists
     def fromList(self, l):
-        if len(l) == 1:
-            if not l[0] == None: 
-                return self.add(l[0])
-        self.add(l[0])
-        self.fromList(l[1:])
-    
+        if len(l)== 1: 
+            self.insertFirst(l[0])
+        else:
+            self.insertFirst(l[0])
+            self.fromList(l[1:])
+        
     def toList(self):
         l = []
         current = self._head
@@ -71,7 +72,6 @@ class DoubleLinkedlist(object):
     
     def isEmpty(self):
         return self._head == None
-    
     
     def search_by_index(self, index):
         #if index is bigger than size/ 2 of list, then we search backwards
@@ -111,10 +111,9 @@ class DoubleLinkedlist(object):
                     self._size -= 1 
                     return 
                 
-                if not current._prev == None:
+                if not current.getPrev() == None:
                     current.getPrev().setNext(current.getNext())
                     current.getNext().setPrev(current.getPrev())
-                    
                 
                 if current is self._head: 
                     self._head._next._prev = None
@@ -127,12 +126,20 @@ class DoubleLinkedlist(object):
     def show(self):
         print("Show list data:")
         current = self.getHead()
+        print("Head: " + str(current.getData()) )
+        current = current.getNext()
+        
         while current is not None:
+            if current == self.getTail(): 
+                print("Tail: " + str(current.getData()))
+                print ("*"*50)
+                return
+            
             print (current.getPrev().getData()) if hasattr(current.getPrev(), "data") else None,
-            print (current.getData()),
+            print (" "*6+str(current.getData())),
             print (current.getNext().getData()) if hasattr(current.getNext(), "data") else None
- 
+            
             current = current.getNext()
-        print ("*"*50)
+        
  
  

@@ -45,8 +45,39 @@ class BinarySearchTree(object):
             else:
                 self._right = BinarySearchTree(x)
     
-    def pre_order_walk(self, root):
-        print(self.getData())
-        if root._left:
-            self.pre_order_walk(root._left)
-        self.pre_order_walk(root._right)
+    def search(self, key):
+        if self is None or self.getData() == key: 
+            return self.getData()
+        
+        if self.getData() < key :
+            return self._right.search(key)
+        return self._left.search(key)
+    
+        
+        
+    def delete(self, x, parent = None):
+        if x < self.getData() : # sök till vänster
+            self._left = self._left.delete(x, self)
+        elif x > self.getData(): 
+            self._right = self._right.delete(x, self)
+        else: # hittat 
+            #hantera 0 barn 1 barn, 2 barn 
+            if parent == None: 
+                self.setData(None) 
+            elif not self._left: 
+                return self._right 
+            elif not self._right: 
+                return self._left 
+            else: #två barn 
+                (psucc, succ) = self._right._findMin(self)
+            succ.left = self._left 
+            succ.right = self._right 
+        return self
+    
+    def _findMin(self, parent):
+        if self._left: 
+            return self._left._findMin(self._left, self)
+        else: 
+            return (parent, self)
+            
+                

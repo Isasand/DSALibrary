@@ -36,11 +36,6 @@ class TestLinkedlist(unittest.TestCase):
         L.add(22, 23)
         self.assertEqual(L.search(23).getData(), 23 )
 
-    def test_Linkedlist_show(self):
-        L = Linkedlist()
-        L.add(1, 2, 3, 4)
-        L.show()
-        
     def test_Linkedlist_reversed(self):
         L = Linkedlist()
         L.add(5, 6, 50, 30)
@@ -60,6 +55,11 @@ class TestLinkedlist(unittest.TestCase):
         self.assertEqual(l.toList(), [25, 24, 22, 20])
         
     
+    def test_Linkedlist_show(self):
+        L = Linkedlist()
+        L.add(1, 2, 3, 4)
+        L.show()
+        
 class TestDoublyLinkedlist(unittest.TestCase):
     
     def test_doublyLinkedlist_insert_first(self):
@@ -68,8 +68,10 @@ class TestDoublyLinkedlist(unittest.TestCase):
         L.insertFirst(6)
         L.insertFirst(30)
         L.insertFirst(50)
+        L.insertFirst(60)
+        L.insertFirst(3)
         L.show()
-        self.assertEqual(L.toList(), [50, 30, 6, 5] )
+        self.assertEqual(L.toList(), [3, 60, 50, 30, 6, 5] )
       
     def test_doublyLinkedlist_insert_last(self):
         
@@ -100,7 +102,6 @@ class TestDoublyLinkedlist(unittest.TestCase):
         L.insertFirst(50)
         self.assertEqual(L.search(50).getData(), 50)
         
-        
     def test_doublyLinkedList_search_backwards(self):
         L = DoubleLinkedlist()
         L.insertFirst(1)
@@ -117,18 +118,23 @@ class TestDoublyLinkedlist(unittest.TestCase):
         L.insertFirst(3)
         L.insertFirst(4)
         L.insertFirst(5)
-        print(L._head.getData())
         self.assertEqual(L.search_by_index(2).getData(), 2)
     
+    def test_doublyLinkedlist_fromList(self):
+        l = [1,2,3,4]
+        L= DoubleLinkedlist() 
+        L.fromList(l)
+        self.assertEqual(L.toList(), [4, 3, 2, 1])
+        
 class testBinarySearchTree(unittest.TestCase):
     
     def test_binarySearchTree_insert(self):
         tree = BinarySearchTree(10)
         tree.insert(20)
         tree.insert(0)
-    
-    
+        self.assertEqual(tree.search(20), 20)
         
+    
 if __name__ == '__main__':
     unittest.main(verbosity=2) 
     

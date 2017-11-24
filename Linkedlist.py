@@ -127,8 +127,11 @@ class Linkedlist(object):
     def show(self):
         print("show list data:")
         current = self._head
+        print("Head: " + str(current.getData()) )
+        current = current.getNext()
         while current is not None:
-            print (current.getData()),
+           
+            print (" "*6+str(current.getData())),
             print (current.getNext().getData()) if hasattr(current.getNext(), "data") else None
  
             current = current.getNext()
