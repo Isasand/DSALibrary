@@ -89,8 +89,12 @@ class Linkedlist(object):
             return current 
         
     def remove(self, node): #remove by value
-        current = self.search(node)
- 
+        current = self.getHead()
+        
+        if self.search(node) is self.getHead():
+            self.setHead(self.getHead().getNext())
+            return
+        
         while current is not None:
             #if it is the tail we need to find the previous one
             if current._next == None: 
@@ -98,7 +102,8 @@ class Linkedlist(object):
                 self._size -= 1
                 return 
                 
-            if current.getNext().getData() == node: 
+            elif current.getNext().getData() == node: 
+                
                 current.setNext(current.getNext().getNext())
                 self._size -= 1
                 return

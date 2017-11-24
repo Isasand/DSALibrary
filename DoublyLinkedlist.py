@@ -11,7 +11,10 @@ class DoubleLinkedlist(object):
     def __init__(self):
         self._head = None
         self._tail = None
- 
+        self._size = 0
+    
+    def getSize(self):
+        return self._size
     
     def getTail(self):
         return self._tail 
@@ -30,20 +33,25 @@ class DoubleLinkedlist(object):
         
         if self.isEmpty():
             self.setTail(newNode)
+            self._size += 1
         else:
             self.getHead().setPrev(newNode)
             newNode.setNext(self._head)
+            self._size += 1
         self.setHead(newNode)
  
     def insertLast(self, data):
         newNode = Node(data)
         if self.isEmpty():
             self._head = self._tail = newNode
+            self._size += 1 
         else:
             newNode.setNext(None)
             newNode.setPrev(self.getTail())
             self.getTail().setNext(newNode)
             self.setTail(newNode)
+            self._size += 1 
+            
         
     def fromList(self, l):
         if len(l) == 1:
@@ -64,7 +72,27 @@ class DoubleLinkedlist(object):
     def isEmpty(self):
         return self._head == None
     
+    
+    def search_by_index(self, index):
+        #if index is bigger than size/ 2 of list, then we search backwards
+        #otherwise forwards
+        if not index > self._size: 
+            if index <  self._size / 2 :
+                index +=1
+                current = self.getHead()
+                for i in range(0, index):
+                    current = current.getNext() 
+                return current
+            elif index > self._size / 2:
+                index -=1
+                current= self.getTail() 
+                for i in range(0, index):
+                    current = current.getPrev()
+                return current
+        return
+        
     def search(self, searchData):
+        
         current = self._head 
         while not current == None:
             if current.getData() == searchData:
@@ -80,15 +108,18 @@ class DoubleLinkedlist(object):
                 # if it's not the first element
                 if current.getNext() == None: 
                     current.getPrev().setNext(None)
+                    self._size -= 1 
                     return 
                 
                 if not current._prev == None:
                     current.getPrev().setNext(current.getNext())
                     current.getNext().setPrev(current.getPrev())
+                    
                 
                 if current is self._head: 
                     self._head._next._prev = None
                     self.setHead(self.getHead().getNext())
+                    self._size -= 1 
                     return
  
             current = current._next
