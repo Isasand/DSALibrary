@@ -28,7 +28,7 @@ class DoubleLinkedlist(object):
     def setHead(self, h):
         self._head = h
         
-    def insertFirst(self, data):
+    def insertFirst(self, data, *moredata):
         newNode = Node(data)
         
         if self.isEmpty():
@@ -40,6 +40,13 @@ class DoubleLinkedlist(object):
             self._size += 1
         self.setHead(newNode)
         
+        if moredata: 
+            if len(moredata) == 1: 
+                self.insertFirst(moredata[0])
+                return 
+            else: 
+                self.insertFirst(moredata[0])
+                self.fromList(list(moredata[1:]))
         
     def insertLast(self, data):
         newNode = Node(data)
@@ -53,7 +60,9 @@ class DoubleLinkedlist(object):
             self.setTail(newNode)
             self._size += 1 
             
-    #i allways insert lists
+    #i allways insert lists from the front
+    #I need to change this or write a new function to allow 
+    #user to input more than one value to insertLast function
     def fromList(self, l):
         if len(l)== 1: 
             self.insertFirst(l[0])
