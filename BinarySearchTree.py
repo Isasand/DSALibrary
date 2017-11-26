@@ -52,6 +52,7 @@ class BinarySearchTree(object):
             self.insert(moredata[0])
             self.fromList(list(moredata[1:]))
             
+
     def fromList(self, l):
         if len(l) == 1:
             self.insert(l[0])

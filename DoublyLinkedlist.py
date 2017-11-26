@@ -78,7 +78,6 @@ class DoubleLinkedlist(object):
             current = current.getNext()
         return l
     
-    
     def isEmpty(self):
         return self._head == None
     
@@ -133,7 +132,7 @@ class DoubleLinkedlist(object):
             current = current._next
  
     def show(self):
-        print("Show list data:")
+        print("DOUBLY LINKED LIST\n(First -> Last)")
         current = self.getHead()
         print("Head: " + str(current.getData()) )
         current = current.getNext()
@@ -141,7 +140,7 @@ class DoubleLinkedlist(object):
         while current is not None:
             if current == self.getTail(): 
                 print("Tail: " + str(current.getData()))
-                print ("*"*50)
+                print ("*"*10)
                 return
             
             print (current.getPrev().getData()) if hasattr(current.getPrev(), "data") else None,

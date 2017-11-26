@@ -4,6 +4,7 @@ Created on Tue Nov 21 11:00:05 2017
 
 @author: Isa
 """
+#for the single linked list we dont use the prev member of the nodes
 
 class Node(object):
     def __init__(self, data):
@@ -28,6 +29,9 @@ class Node(object):
     
     def setPrev(self, argPrev):
         self._prev = argPrev
+    
+    def displayData(self): 
+        print(self._data)
         
 class Linkedlist(object):
     def __init__(self):
@@ -125,7 +129,7 @@ class Linkedlist(object):
         
         
     def show(self):
-        print("show list data:")
+        print("SINGLE LINKED LIST\n(First -> Last)")
         current = self._head
         print("Head: " + str(current.getData()) )
         current = current.getNext()
@@ -135,7 +139,7 @@ class Linkedlist(object):
             print (current.getNext().getData()) if hasattr(current.getNext(), "data") else None
  
             current = current.getNext()
-        print ("*"*50)
+        print ("*"*10)
  
     
     def toList(self):

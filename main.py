@@ -9,7 +9,7 @@ import unittest
 from Linkedlist import Linkedlist
 from DoublyLinkedlist import DoubleLinkedlist
 from BinarySearchTree import BinarySearchTree 
-
+from DoubleEndedLinkedlist import DoubleEndedLinkedlist
 
 class TestLinkedlist(unittest.TestCase):
     def test_Linkedlist_toList(self):
@@ -53,7 +53,6 @@ class TestLinkedlist(unittest.TestCase):
         l.add(22, 24, 25)
         l.insert(20, 22)
         self.assertEqual(l.toList(), [25, 24, 22, 20])
-        
     
     def test_Linkedlist_show(self):
         L = Linkedlist()
@@ -75,7 +74,6 @@ class TestDoublyLinkedlist(unittest.TestCase):
         P.insertLast(6)
         P.insertLast(30)
         P.insertLast(50)
-        
         self.assertEqual(P.toList(), [5, 6, 30, 50] )
     
     def test_doublyLinkedlist_remove(self):
@@ -106,7 +104,23 @@ class TestDoublyLinkedlist(unittest.TestCase):
         L= DoubleLinkedlist() 
         L.fromList(l)
         self.assertEqual(L.toList(), [4, 3, 2, 1])
-        
+    
+class testDoubleEndedLinkedlist(unittest.TestCase): 
+    
+    def test_insert_last(self): 
+        l = DoubleEndedLinkedlist()
+        l.insertLast(2)
+        l.insertLast(3)
+        l.printList() 
+        self.assertEqual(l.toList(), [2, 3])
+
+    def test_insert_first(self):
+        l = DoubleEndedLinkedlist() 
+        l.insertFirst(1, 2, 3, 4, 5, 6, 7)
+        self.assertEqual(l.toList(), [7, 6, 5, 4, 3, 2, 1])
+    
+    
+    
 class testBinarySearchTree(unittest.TestCase):
     
     def test_binarySearchTree_insert(self):
@@ -115,8 +129,6 @@ class testBinarySearchTree(unittest.TestCase):
         self.assertEqual(tree.search(20), 20)
         
     def test_binarySearchTree_size(self):
-        #obviously the size starts at 0 and you will get the size - 1 out of the size function 
-        #i will rewrite it 
         tree = BinarySearchTree(10)
         tree.insert(20, 0)
         self.assertEqual(tree.size(), 2)
@@ -130,7 +142,6 @@ class testBinarySearchTree(unittest.TestCase):
         tree = BinarySearchTree(10)
         tree.insert(20, 0, 100, 50)
         self.assertEqual(tree.toList(), [10, 0, 20, 100, 50])
-        
         
     def test_delete_leaf(self):
         tree = BinarySearchTree(10)
@@ -151,8 +162,6 @@ class testBinarySearchTree(unittest.TestCase):
         tree.delete(20)
         print("\nremoved node with data == 20")
         tree.printHierarchy()
-        
-        
         
 if __name__ == '__main__':
     unittest.main(verbosity=2) 
