@@ -29,7 +29,6 @@ class DoubleEndedLinkedlist(object):
                 self.insertFirst(moreData[0])
                 self.fromList(list(moreData[1:]))
         
-         
     def isEmpty(self):
         return self._head == None
         
@@ -57,11 +56,12 @@ class DoubleEndedLinkedlist(object):
             current = current.getNext() 
         return l 
     
-    #i allways insert lists from front
+    #I allways insert lists from front
     def fromList(self, l): 
         if len(l) == 1: 
             self.insertFirst(l[0])
         else: 
             self.insertFirst(l[0])
             self.fromList(l[1:])
-            
+    
+    

@@ -12,7 +12,6 @@ class BinarySearchTree(object):
         self._left = None 
         self._right = None
         
-        
     def getData(self):
         return self._data
     
@@ -51,7 +50,6 @@ class BinarySearchTree(object):
                 return
             self.insert(moredata[0])
             self.fromList(list(moredata[1:]))
-            
 
     def fromList(self, l):
         if len(l) == 1:
@@ -60,7 +58,6 @@ class BinarySearchTree(object):
             self.insert(l[0])
             self.fromList(l[1:])
         
-            
     def printHierarchy(self):
         thislevel = [self]
         while thislevel: 
@@ -104,7 +101,6 @@ class BinarySearchTree(object):
             depth += 1
         return depth 
             
-            
     #TODO: fix this function ( the right childs )
     def printStructure(self):
         thislevel = [self]
@@ -136,35 +132,39 @@ class BinarySearchTree(object):
             return self._right.search(key)
         return self._left.search(key)
     
-    def delete(self, x, parent=None ):
-        if x < self.getData():
-            self._left = self._left.delete( x, self )
-        elif x > self.getData():
-            self._right = self._right.delete( x, self )
-        else:
-            # x == self.data - ta bort
-            if parent==None:
-                self.setData( None )
-            elif not self._left:
-                return self._right
-            elif not self._right:
-                return self._left
-            else:
-                (psucc, succ) = self._right._findMin( self )
-                if psucc._left == succ:
-                    psucc._left = succ._right
-                else:
-                    psucc._right = succ._right
-                succ._left = self._left
-                succ._right = self._right
-                return succ
-        return self
-
+    def findMin(self, node):
+        current = node
+        while current._left is not None: 
+            current = current._left 
+        return current
     
-    def _findMin(self, parent):
-        if self._left: 
-            return self._left._findMin(self)
+    '''
+    Node to be deleted is leaf, simply remove from the tree 
+    Node to be deleted has only one child: copy the child to the node and delete the child 
+    Node to be deleted has two children: find inorder successor of the node
+    Copy contents of the inorder successor to the node and delete the inorder successor 
+    Note that inorder predecessor can also be used. 
+    '''
+    
+    def deleteNode(self, root, key):
+        if root is None: 
+            return root 
+        if key < root.getData(): 
+            root._left = self.deleteNode(root._left, key)
+        elif (key > root.getData()):
+            root._right = self.deleteNode(root._right, key)
         else: 
-            return (parent, self)
+            if root._left is None: 
+                temp = root._right 
+                root = None 
+                return temp
+            elif root._right is None: 
+                temp = root._left
+                root = None
+                return temp 
             
-                
+            temp = self.findMin(root._right)
+            root.key = temp.getData()
+            root._right = self.deleteNode(root._right, temp.getData())
+        return root 
+    

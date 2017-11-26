@@ -119,8 +119,6 @@ class testDoubleEndedLinkedlist(unittest.TestCase):
         l.insertFirst(1, 2, 3, 4, 5, 6, 7)
         self.assertEqual(l.toList(), [7, 6, 5, 4, 3, 2, 1])
     
-    
-    
 class testBinarySearchTree(unittest.TestCase):
     
     def test_binarySearchTree_insert(self):
@@ -145,12 +143,15 @@ class testBinarySearchTree(unittest.TestCase):
         
     def test_delete_leaf(self):
         tree = BinarySearchTree(10)
-        self.assertEqual(tree.delete(10).getData(), None)
+        tree.insert(20)
+        tree.deleteNode(tree,20)
+        self.assertEqual(tree.toList(), [10])
         
     def test_delete_one_child(self):
         tree = BinarySearchTree(10)
         tree.insert(20)
-        self.assertEqual(tree.delete(10).getData(), None)
+        tree.deleteNode(tree, 10)
+        self.assertEqual(tree.toList(), [20])
         
     def test_delete_two_childs(self):
         tree = BinarySearchTree(10)
@@ -159,7 +160,7 @@ class testBinarySearchTree(unittest.TestCase):
         tree.printHierarchy()
         print("\nDepth")
         print(tree.getDepth())
-        tree.delete(20)
+        tree.deleteNode(tree,20)
         print("\nremoved node with data == 20")
         tree.printHierarchy()
         
