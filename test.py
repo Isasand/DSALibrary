@@ -202,6 +202,19 @@ class TestGraph(unittest.TestCase):
         trainConnections.addEdge("Stockholm", "Göteborg", weight = 150)
         trainConnections.addEdge("Stockholm", "Linköping", weight = 50)
         trainConnections.addEdge("Linköping", "Göteborg", weight = 50)
-        self.assertEqual(trainConnections.findAllPaths("Stockholm", "Göteborg"), [['Stockholm', 'Linköping', 'Göteborg'], ['Stockholm', 'Göteborg']])
+        self.assertEqual(trainConnections.findAllPaths("Stockholm", "Göteborg"), [['Stockholm', 'Göteborg'], ['Stockholm', 'Linköping', 'Göteborg']])
         self.assertEqual(trainConnections.findShortestPath("Stockholm", "Göteborg"), ['Stockholm', 'Göteborg'])
+        trainConnections.findCheapestPath("Stockholm", "Göteborg")
+    
+    def testCostOfPath(self):
+        trainConnections =  Graph()
+        trainConnections.addVertex("Stockholm")
+        trainConnections.addVertex("Göteborg" )
+        trainConnections.addVertex("Linköping")
+        trainConnections.addEdge("Stockholm", "Göteborg", weight = 150)
+        trainConnections.addEdge("Stockholm", "Linköping", weight = 50)
+        trainConnections.addEdge("Linköping", "Göteborg", weight = 50)
+        self.assertEqual(trainConnections.findCheapestPath("Stockholm", "Göteborg"), (['Stockholm', 'Linköping', 'Göteborg'], 100))
+        
+        
         

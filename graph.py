@@ -112,3 +112,25 @@ class Graph:
                         if not shortest or len(newPath) < len(shortest):
                             shortest = newPath
             return shortest 
+        
+        def findCostOfPath(self, path):
+            cost = 0
+            for i in range(len(path)):
+                if i < len(path)-1:
+                    cost += self.cost(path[i], path[i+1])
+            return cost 
+            
+        def findCheapestPath(self, start, end, visited = []):
+            paths = self.findAllPaths(start, end, visited = [])
+            cheapest = 0
+            returnPath = ([])
+            for path in paths: 
+                cost = 0
+                cost += self.findCostOfPath(path)
+                if cheapest == 0: 
+                    cheapest = cost 
+                    returnPath = (path, cheapest)
+                if cost < cheapest:
+                    cheapest = cost
+                    returnPath = (path, cheapest)
+            return returnPath #cheapest
