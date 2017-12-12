@@ -18,6 +18,12 @@ class BinarySearchTree(object):
     def setData(self, argData):
         self._data = argData
         
+    def traversal_inorder(self, root):
+        if root is not None: 
+            self.traversal_inorder(root._left)
+            print(root.getData())
+            self.traversal_inorderinorder(root._right)
+            
     def isEmpty(self):
         return self._left == self._right == self._data == None
     
